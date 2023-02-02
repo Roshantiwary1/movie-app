@@ -8,18 +8,31 @@ import { FetchDataFromApi } from "./utils/Api";
 import Header from "./components/Header";
 import { useDispatch,useSelector } from "react-redux";
 import { getUrlConfiguration } from "./store/homeSlice";
+import Details from "./pages/Details";
+import SearchDetail from "./pages/SearchDetail";
+import Explore from "./pages/Explore";
+import Footer from './components/Footer';
 function App() {
 
 const dispatch = useDispatch();
 const url = useSelector(state=>state.home.url)
 
   useEffect(()=>{
-    apiTesting();
+    fetchApiConfiguration();
     console.log(url?.results);
   },[])
 
-  const apiTesting =()=>{
-    FetchDataFromApi('/movie/popular').then((res)=>{dispatch(getUrlConfiguration(res))
+  const fetchApiConfiguration =()=>{
+    FetchDataFromApi('/configuration')
+    .then((res)=>{
+      const url = {
+          backdrop:res.images.secure_base_url + "original",
+          poster:res.images.secure_base_url + "original",
+          profile:res.images.secure_base_url + "original"
+      }
+
+      console.log(res.results);
+      dispatch(getUrlConfiguration(url))
     })
    
   }
@@ -29,12 +42,14 @@ const url = useSelector(state=>state.home.url)
         <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
-         
+         <Route path="/:mediaType/:id" element={<Details/>}/>
+         <Route path="/search/:query" element={<SearchDetail/>}/>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         
         </Routes>
+        <Footer/>
       </Router>
      
     </>

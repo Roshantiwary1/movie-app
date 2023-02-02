@@ -67,3 +67,12 @@ skeleton::after {
           transform: translateX(100%);
       }
   }
+
+  .opacityLayer{
+    height: 250px;
+    width: 100%;
+    background: linear-gradient(180deg,rgba(4,21,45,0) 0%, #04152d 72.19%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
