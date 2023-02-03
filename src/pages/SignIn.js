@@ -39,7 +39,7 @@ export default function SignIn() {
 
   return(
     <section>
-    <h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
+    <h1 className="text-3xl text-center mt-6 font-bold text-white">Sign In</h1>
     <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
       <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
         <img
@@ -80,7 +80,7 @@ export default function SignIn() {
             )}
           </div>
           <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
-            <p className="mb-6">
+            <p className="mb-6 text-white">
               Don't have a account?
               <Link
                 to="/sign-up"
@@ -105,7 +105,7 @@ export default function SignIn() {
             Sign in
           </button>
           <div className="flex items-center  my-4 before:border-t before:flex-1 before:border-gray-300 after:border-t after:flex-1 after:border-gray-300">
-            <p className="text-center font-semibold mx-4">OR</p>
+            <p className="text-center font-semibold mx-4 text-white">OR</p>
           </div>
           <OAuth />
         </form>

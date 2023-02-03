@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import {useState,useEffect} from "react";
+import {useEffect} from "react";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -10,32 +10,31 @@ import { useDispatch,useSelector } from "react-redux";
 import { getUrlConfiguration } from "./store/homeSlice";
 import Details from "./pages/Details";
 import SearchDetail from "./pages/SearchDetail";
-import Explore from "./pages/Explore";
 import Footer from './components/Footer';
 function App() {
 
 const dispatch = useDispatch();
 const url = useSelector(state=>state.home.url)
 
+const fetchApiConfiguration =()=>{
+  FetchDataFromApi('/configuration')
+  .then((res)=>{
+    const url = {
+        backdrop:res.images.secure_base_url + "original",
+        poster:res.images.secure_base_url + "original",
+        profile:res.images.secure_base_url + "original"
+    }
+    dispatch(getUrlConfiguration(url))
+  })
+ 
+}
+
   useEffect(()=>{
     fetchApiConfiguration();
     console.log(url?.results);
-  },[])
+  },[url?.results])
 
-  const fetchApiConfiguration =()=>{
-    FetchDataFromApi('/configuration')
-    .then((res)=>{
-      const url = {
-          backdrop:res.images.secure_base_url + "original",
-          poster:res.images.secure_base_url + "original",
-          profile:res.images.secure_base_url + "original"
-      }
-
-      console.log(res.results);
-      dispatch(getUrlConfiguration(url))
-    })
-   
-  }
+  
   return (
     <>
       <Router>
