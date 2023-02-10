@@ -4,7 +4,7 @@ import "../style/Home.scss"
 import useFetch from '../hooks/useFetch'
 import Carousel from './carousel/Carousel'
 const Popular = () => {
-    const {data,loading} = useFetch(`/movie/popular/`)
+    const {data,loading} = useFetch(`/movie/popular`)
 
   return (
     <div className='carouselSection'>
